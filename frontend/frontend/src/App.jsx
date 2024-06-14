@@ -6,6 +6,7 @@ import Products from "./components/Products/Products";
 import Slider from "./components/Slider/Sliders";
 import "./App.css";
 import Campaigns from "./components/Campaigns/Campaigns";
+import Blogs from "./components/Blogs/Blogs";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Categories/>
       <Products/>
       <Campaigns/>
+      <Blogs/>
       <Policy />
       <Footer />
     </div>
