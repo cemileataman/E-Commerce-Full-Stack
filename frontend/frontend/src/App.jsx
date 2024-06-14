@@ -1,14 +1,14 @@
-import HomePage from "./pages/HomePage";
-import "./App.css";
 import React from "react";
-import ShopPage from "./pages/ShopPage";
+// import ShopPage from "./pages/ShopPage";
+import "./App.css";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
     <React.Fragment>
       {/* <HomePage/> */}
-      <ShopPage/>
-      
+      {/* <ShopPage/> */}
+      <ContactPage/>
     </React.Fragment>
   );
 }
