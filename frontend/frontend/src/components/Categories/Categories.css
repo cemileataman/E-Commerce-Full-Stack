@@ -1,0 +1,9 @@
+.categories {
+    margin: 40px 0;
+  }
+  .categories .categories-list {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
