@@ -4,10 +4,11 @@ import Header from "./components/Layout/Header/Header";
 import Policy from "./components/Layout/Policy/Policy";
 import Products from "./components/Products/Products";
 import Slider from "./components/Slider/Sliders";
-import "./App.css";
 import Campaigns from "./components/Campaigns/Campaigns";
 import Blogs from "./components/Blogs/Blogs";
 import Brands from "./components/Brands/Brands";
+import CampaignSingle from "./components/CampaignSingle/CampaignSingle";
+import "./App.css";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Campaigns />
       <Blogs />
       <Brands />
+      <CampaignSingle/>
       <Policy />
       <Footer />
     </div>
