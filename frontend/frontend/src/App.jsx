@@ -6,7 +6,8 @@ import React from "react";
 // import BlogPage from "./pages/BlogPage";
 
 import "./App.css";
-import BlogDetailsPage from "./pages/BlogDetailsPage";
+// import BlogDetailsPage from "./pages/BlogDetailsPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
       {/* <AuthPage/> */}
       {/* <CartPage/> */}
       {/* <BlogPage/> */}
-     <BlogDetailsPage/>
+     {/* <BlogDetailsPage/> */}
+     <ProductDetailsPage/>
     </React.Fragment>
   );
 }
