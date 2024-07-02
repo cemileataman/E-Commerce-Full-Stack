@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 const Category = require("../models/Category.js");
 
 // Yeni bir kategori oluşturma (Create)
@@ -68,6 +69,27 @@ router.put("/:categoryId", async (req, res) => {
     res.status(200).json(updatedCategory);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: "Server error." });
+  }
+});
+ //Kategori Silme
+router.delete("/:categoryId", async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+
+    if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+      return res.status(400).json({ error: "Invalid category ID." });
+    }
+
+    const deletedCategory = await Category.findByIdAndDelete(categoryId);
+
+    if (!deletedCategory) {
+      return res.status(404).json({ error: "Category not found." });
+    }
+
+    res.status(200).json(deletedCategory);
+  } catch (error) {
+    console.error("Error deleting category:", error);
     res.status(500).json({ error: "Server error." });
   }
 });
