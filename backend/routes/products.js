@@ -49,4 +49,35 @@ router.get("/:productId", async (req, res) => {
   }
 });
 
+// Ürün güncelleme (Update)
+// Ürün güncelleme (Update)
+router.put("/:productId", async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const updates = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ error: "Invalid product ID." });
+    }
+
+    const existingProduct = await Product.findById(productId);
+
+    if (!existingProduct) {
+      return res.status(404).json({ error: "Product not found." });
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      updates,
+      { new: true, runValidators: true } // runValidators: true eklenmiştir
+    );
+
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).json({ error: "Server error." });
+  }
+});
+
+
 module.exports = router;
