@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 const Coupon = require("../models/Coupon.js");
 
 // Yeni bir kupon oluşturma (Create)
@@ -73,25 +74,63 @@ router.get("/code/:couponCode", async (req, res) => {
 
 // coupon güncelleme (Update)
 router.put("/:couponId", async (req, res) => {
-  try {
-    const couponId = req.params.couponId;
-    const updates = req.body;
-
-    const existingCoupon = await Coupon.findById(couponId);
-
-    if (!existingCoupon) {
-      return res.status(404).json({ error: "Coupon not found." });
+    try {
+      const couponId = req.params.couponId;
+  
+      // Validate couponId
+      if (!mongoose.Types.ObjectId.isValid(couponId)) {
+        return res.status(400).json({ error: "Invalid coupon ID." });
+      }
+  
+      const updates = req.body;
+  
+      // Find the existing coupon
+      const existingCoupon = await Coupon.findById(couponId);
+  
+      // If coupon not found, return a 404 status
+      if (!existingCoupon) {
+        return res.status(404).json({ error: "Coupon not found." });
+      }
+  
+      // Update the coupon with new values
+      const updatedCoupon = await Coupon.findByIdAndUpdate(couponId, updates, {
+        new: true,
+        runValidators: true, // Ensures that the updates are validated against the schema
+      });
+  
+      // Return the updated coupon
+      res.status(200).json(updatedCoupon);
+    } catch (error) {
+      // Log the full error stack
+      console.error("Error updating coupon:", error.stack);
+      res.status(500).json({ error: "Server error." });
     }
+  });
 
-    const updatedCoupon = await Coupon.findByIdAndUpdate(couponId, updates, {
-      new: true,
-    });
-
-    res.status(200).json(updatedCoupon);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Server error." });
-  }
-});
-
+ // Coupon deletion (Delete)
+router.delete("/:couponId", async (req, res) => {
+    try {
+      const couponId = req.params.couponId;
+  
+      // Validate couponId
+      if (!mongoose.Types.ObjectId.isValid(couponId)) {
+        return res.status(400).json({ error: "Invalid coupon ID." });
+      }
+  
+      // Find and delete the coupon
+      const deletedCoupon = await Coupon.findByIdAndDelete(couponId);
+  
+      // If coupon not found, return a 404 status
+      if (!deletedCoupon) {
+        return res.status(404).json({ error: "Coupon not found." });
+      }
+  
+      // Return the deleted coupon
+      res.status(200).json(deletedCoupon);
+    } catch (error) {
+      // Log the full error stack
+      console.error("Error deleting coupon:", error.stack);
+      res.status(500).json({ error: "Server error." });
+    }
+  });  
 module.exports = router;
