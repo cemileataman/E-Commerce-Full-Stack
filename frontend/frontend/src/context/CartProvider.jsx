@@ -35,6 +35,7 @@ const CartProvider = ({ children }) => {
       value={{
         cartItems,
         addToCart,
+        setCartItems,
         removeFromCart,
         
       }}
