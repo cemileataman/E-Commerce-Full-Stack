@@ -4,6 +4,7 @@ import Info from "./Info/Info";
 import PropTypes from "prop-types";
 import "./ProductDetails.css";
 import Tabs from "./Tabs/Tabs";
+
 const ProductDetails = ({ singleProduct }) => {
   return (
     <section className="single-product">
@@ -13,7 +14,7 @@ const ProductDetails = ({ singleProduct }) => {
           <div className="single-content">
             <main className="site-main">
             <Gallery singleProduct={singleProduct} />
-              <Info />
+            <Info singleProduct={singleProduct} />
             </main>
           </div>
 
