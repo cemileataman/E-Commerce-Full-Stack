@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { message } from "antd";
@@ -24,7 +23,7 @@ const ReviewForm = ({ singleProduct, setSingleProduct }) => {
         {
           text: review,
           rating: parseInt(rating),
-          user: user.id,
+          user: user.id || user._id,
         },
       ],
     };
@@ -37,7 +36,7 @@ const ReviewForm = ({ singleProduct, setSingleProduct }) => {
         },
         body: JSON.stringify(formData),
       });
-      
+
       if (!res.ok) {
         message.error("Bir şeyler yanlış gitti.");
         return;
