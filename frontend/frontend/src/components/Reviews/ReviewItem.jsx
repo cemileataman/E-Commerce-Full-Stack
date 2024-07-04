@@ -1,4 +1,13 @@
-const ReviewItem = () => {
+import PropTypes from "prop-types";
+
+const ReviewItem = ({ reviewItem }) => {
+  const { text, createdAt } = reviewItem;
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedDate = new Date(createdAt).toLocaleDateString(
+    "tr-TR",
+    options
+  );
+
   return (
     <li className="comment-item">
       <div className="comment-avatar">
@@ -23,15 +32,12 @@ const ReviewItem = () => {
           </li>
         </ul>
         <div className="comment-meta">
-          <strong>admin</strong>
-          <span>-</span>
-          <time>April 23, 2022</time>
+        <strong> admin</strong>
+          <span> - </span>
+          <time>{formattedDate}</time>
         </div>
         <div className="comment-description">
-          <p>
-            Sed perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium.
-          </p>
+        <p>{text}</p>
         </div>
       </div>
     </li>
@@ -39,3 +45,6 @@ const ReviewItem = () => {
 };
 
 export default ReviewItem;
+ReviewItem.propTypes = {
+  reviewItem: PropTypes.object,
+};
